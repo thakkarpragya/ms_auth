@@ -30,7 +30,11 @@ def login(request):
                         status=HTTP_404_NOT_FOUND)                        
                         
     token, _ = Token.objects.get_or_create(user=user)      
-    return Response({'token': token.key},
+    return Response({'token': token.key,
+                     'username':username,
+                     'isFirstTimeLogin':user.isFirstTimeLogin,
+                     'role':user.role,
+                     'name':user.name},
                     status=HTTP_200_OK)
  
  
