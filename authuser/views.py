@@ -34,10 +34,11 @@ def login(request):
                      'username':username,
                      'isFirstTimeLogin':user.isFirstTimeLogin,
                      'role':user.role,
-                     'name':user.name},
+                     'name':user.name,
+                     'email': user.email},
                     status=HTTP_200_OK)
  
- 
+@csrf_exempt 
 @api_view(["POST"])
 def resetpassword(request):
     username = request.data.get("username")
@@ -52,12 +53,13 @@ def resetpassword(request):
                         status=HTTP_404_NOT_FOUND)                 
         
     user.set_password(newpassword)
+    user.isFirstTimeLogin = 0
     user.save()    
     return Response({'Password Updated successfully'},
                     status=HTTP_200_OK)  
                     
                     
-                    
+@csrf_exempt                    
 @api_view(["POST"])
 def logout(request):
     
@@ -66,5 +68,14 @@ def logout(request):
     #logout(request)
     
     return Response({'User logged out successfully'},
-                    status=HTTP_200_OK)                 
+                    status=HTTP_200_OK)   
+                    
+@api_view(["GET"])
+def hello(request):
+
+    
+    #logout(request)
+    
+    return Response({'Hello User'},
+                    status=HTTP_200_OK)                    
                     
