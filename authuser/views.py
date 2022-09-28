@@ -62,18 +62,19 @@ def resetpassword(request):
 @csrf_exempt                    
 @api_view(["POST"])
 def logout(request):
-    
+
     request.user.auth_token.delete()
-    
     #logout(request)
     
     return Response({'User logged out successfully'},
                     status=HTTP_200_OK)   
-                    
+
+@csrf_exempt                    
 @api_view(["GET"])
+@permission_classes((AllowAny,))
 def hello(request):
 
-    
+    print('in request')
     #logout(request)
     
     return Response({'Hello User'},
