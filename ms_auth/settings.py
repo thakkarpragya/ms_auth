@@ -45,9 +45,7 @@ INSTALLED_APPS = [
     # REST API application 
     'authuser',    
     # CORS
-    'corsheaders',
-    # Rest validate
-    'validate'
+    'corsheaders'
 ]
 
 REST_FRAMEWORK = {
@@ -102,7 +100,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME','auth_db'),
         'USER': os.environ.get('DB_USER','postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD','postgres'),
-        'PORT': os.environ.get('DB_PORT',59360),
+        'PORT': os.environ.get('DB_PORT',5432),
     }
 }
 

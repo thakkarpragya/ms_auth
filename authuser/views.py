@@ -80,3 +80,21 @@ def hello(request):
     return Response({'Hello User'},
                     status=HTTP_200_OK)                    
                     
+
+
+@csrf_exempt                    
+@api_view(["GET"])
+@permission_classes((AllowAny,))
+def validate(request):
+
+    token = request.headers.get('Authorization').split("Token ")[1] if request.headers.get('Authorization') is not None else ''
+
+    if token and Token.objects.filter(pk=token).exists():
+        return Response(
+                {"authorized"},
+                status=HTTP_200_OK
+                )
+
+    return Response({'User token not found'},
+                    status=HTTP_404_NOT_FOUND)
+
